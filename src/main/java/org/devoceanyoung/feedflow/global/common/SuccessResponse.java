@@ -20,9 +20,9 @@ public class SuccessResponse<T> {
                 .body(SuccessResponse.of(SuccessCode.OK, data));
     }
 
-    public static <T> ResponseEntity<SuccessResponse<?>> created(T data) {
+    public static <T> ResponseEntity<SuccessResponse<?>> created() {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(SuccessResponse.of(SuccessCode.CREATED, data));
+                .body(SuccessResponse.of(SuccessCode.CREATED, null));
     }
 
 

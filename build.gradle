@@ -33,6 +33,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'mysql:mysql-connector-java:8.0.33'
 
+    // Flux(for stream)
+    implementation 'io.projectreactor:reactor-core'
+
+    //WebClient(for stream)
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 }
 
 tasks.named('test') {

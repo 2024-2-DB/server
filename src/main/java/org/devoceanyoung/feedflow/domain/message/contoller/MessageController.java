@@ -55,13 +55,6 @@ public class MessageController {
         return SuccessResponse.ok(messages);
     }
 
-// AI 채팅 반환(sync)
-    @PostMapping("/sync")
-    public ResponseEntity<SuccessResponse<?>> getGptOutputSync(@RequestBody AIMessageRequestDTO aiMessageRequestDTO) {
-        String messages =  messageService.getGptOutputSync(aiMessageRequestDTO);
-        return SuccessResponse.ok(messages);
-    }
-
 
 }
 

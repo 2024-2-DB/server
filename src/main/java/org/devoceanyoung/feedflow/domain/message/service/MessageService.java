@@ -3,10 +3,7 @@ package org.devoceanyoung.feedflow.domain.message.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.devoceanyoung.feedflow.domain.message.dto.AIMessageRequestDTO;
-import org.devoceanyoung.feedflow.domain.message.dto.AllMessageRequestDTO;
-import org.devoceanyoung.feedflow.domain.message.dto.GptRequestDTO;
-import org.devoceanyoung.feedflow.domain.message.dto.UserMessageDTO;
+import org.devoceanyoung.feedflow.domain.message.dto.*;
 import org.devoceanyoung.feedflow.domain.message.entity.Message;
 import org.devoceanyoung.feedflow.domain.message.repository.MessageRepository;
 import org.devoceanyoung.feedflow.domain.team.entity.Team;
@@ -151,12 +148,14 @@ public class MessageService {
 
 
 
-    public List<Message> getAllMessage(AllMessageRequestDTO allMessageRequestDTO) {
+    public List<AllMessageResponseDTO> getAllMessage(AllMessageRequestDTO allMessageRequestDTO) {
         UserTeam userTeam = userTeamRepository.findUserTeamByUser_UserIdAndTeam_TeamId(allMessageRequestDTO.userId(), allMessageRequestDTO.teamId())
                 .orElseThrow(() -> new RuntimeException("No userteam found for userId " + allMessageRequestDTO.userId()));
+        List<Message> messages = messageRepository.findAllByUserTeamOrderByCreatedAtAsc(userTeam);
+        return messages.stream()
+                .map(message -> new AllMessageResponseDTO(message.getRole(), message.getContent(), message.getCreatedAt())
+                ).collect(Collectors.toList());
 
-        System.out.println("UserTeam: " + userTeam);
-        return messageRepository.findAllByUserTeamOrderByCreatedAtAsc(userTeam);
     }
 
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.devoceanyoung.feedflow.domain.message.dto.AIMessageRequestDTO;
 import org.devoceanyoung.feedflow.domain.message.dto.AllMessageRequestDTO;
+import org.devoceanyoung.feedflow.domain.message.dto.AllMessageResponseDTO;
 import org.devoceanyoung.feedflow.domain.message.dto.UserMessageDTO;
 import org.devoceanyoung.feedflow.domain.message.entity.Message;
 import org.devoceanyoung.feedflow.domain.message.service.MessageService;
@@ -51,7 +52,7 @@ public class MessageController {
     // 채팅 조회
     @GetMapping()
     public ResponseEntity<SuccessResponse<?>> getChatPage(@RequestBody AllMessageRequestDTO allMessageRequestDTO) {
-        List<Message> messages = messageService.getAllMessage(allMessageRequestDTO);
+        List<AllMessageResponseDTO> messages = messageService.getAllMessage(allMessageRequestDTO);
         return SuccessResponse.ok(messages);
     }
 

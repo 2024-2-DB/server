@@ -35,8 +35,10 @@ public class Message {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    public Message(String role, String content) {
+    public Message(String role, String content, LocalDateTime createdAt) {
         this.role = role;
         this.content = content;
+        this.createdAt = createdAt;
     }
+
 }

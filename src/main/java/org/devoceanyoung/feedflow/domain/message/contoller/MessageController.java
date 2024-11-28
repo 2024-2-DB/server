@@ -50,7 +50,7 @@ public class MessageController {
     }
 
     // 채팅 조회
-    @GetMapping()
+    @PostMapping()
     public ResponseEntity<SuccessResponse<?>> getChatPage(@RequestBody AllMessageRequestDTO allMessageRequestDTO) {
         List<AllMessageResponseDTO> messages = messageService.getAllMessage(allMessageRequestDTO);
         return SuccessResponse.ok(messages);
